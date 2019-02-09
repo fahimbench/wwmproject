@@ -1,0 +1,6 @@
+<resources>
+    <!-- CELUI DE MA TABLETTE QILIVE 600x1024 -->
+    <dimen name="size_text_home_title">150sp</dimen>
+    <dimen name="size_text_home_nav">50sp</dimen>
+    <dimen name="size_text_home_sign">20sp</dimen>
+</resources>

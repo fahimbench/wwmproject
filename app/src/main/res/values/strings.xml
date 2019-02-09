@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">wwmproject</string>
+    <string name="app_name">Sudoku</string>
+    <string name="text_home_title">Sudoku</string>
+    <string name="text_home_nav_play">Jouer</string>
+    <string name="text_home_nav_ladder">Classement</string>
+    <string name="text_home_nav_preferences">Paramètres</string>
+    <string name="text_home_nav_sign">Par Fahim B.</string>
+
+    <!-- Préférences -->
+    <string name="title_activity_settings">Paramètres</string>
+
+    <string name="title_pseudonyme">Pseudonyme</string>
+    <string name="title_pseudonyme_summary">Changer son pseudonyme</string>
+
+    <string name="title_difficulty">Difficulté</string>
+    <string name="title_difficulty_summary">Changer la difficulté</string>
+
+    <string name="difficulty1">Facile</string>
+    <string name="difficulty2">Difficile</string>
+
 </resources>
