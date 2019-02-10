@@ -17,5 +17,5 @@
 
     <string name="difficulty1">Facile</string>
     <string name="difficulty2">Difficile</string>
-
+    <string name="solo">Solo</string>
 </resources>
