@@ -19,10 +19,12 @@ import java.util.ArrayList;
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private ArrayList<JSONObject> test;
-
+    private int difficulty;
     // Pass in the contact array into the constructor
-    public LeaderboardAdapter(ArrayList<JSONObject> test) {
+    public LeaderboardAdapter(ArrayList<JSONObject> test, int difficulty) {
+
         this.test = test;
+        this.difficulty = difficulty;
     }
 
     @NonNull
@@ -49,9 +51,23 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         TextView scoreView = viewHolder.score;
 
         try {
-            posView.setText(obj.getString("id"));
-            pseudoview.setText(obj.getString("firstname"));
-            scoreView.setText(obj.getString("lastname"));
+            if(this.difficulty != 0){
+                posView.setText(String.valueOf(i+1));
+                pseudoview.setText(obj.getString("idUser"));
+                scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
+            }else{
+                posView.setText("Meilleur temps : ");
+                String diff;
+
+                if(Integer.valueOf(obj.getString("type")) == 1){
+                    diff = "Facile";
+                }else{
+                    diff = "Difficile";
+                }
+                pseudoview.setText(diff);
+                scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
+            }
+
         }catch (JSONException e){
             e.getMessage();
         }
@@ -80,5 +96,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             pseudo = itemView.findViewById(R.id.pseudo_leaderboard);
             score = itemView.findViewById(R.id.score_leaderboard);
         }
+    }
+
+    private String secondsToString(int pTime) {
+        return String.format("%02d:%02d", pTime / 60, pTime % 60);
     }
 }

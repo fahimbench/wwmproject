@@ -1,14 +1,14 @@
 package com.bgeiotdev.eval.leaderboard;
 
-import android.content.SharedPreferences;
+
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 import android.widget.ProgressBar;
 
 import com.bgeiotdev.eval.R;
@@ -38,6 +38,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         String a = sp.getString("host", "");
         */
 
+
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeButtonEnabled(true);
 
@@ -49,8 +50,9 @@ public class LeaderboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_leaderboard, menu);
-        return true;
+        menu.performIdentifierAction(R.id.easy_tab, 0);
 
+        return true;
     }
 
 
@@ -60,6 +62,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         listMenu.put("easy", R.id.easy_tab);
         listMenu.put("hard", R.id.hard_tab);
         listMenu.put("solo", R.id.alone_tab);
+
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -92,6 +95,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     private void loadList(int menuItemId){
 
         disabledTabAndEnabledOthers(menuItemId);
+
         searchLeaderboard(menuItemId);
     }
 
@@ -122,16 +126,17 @@ public class LeaderboardActivity extends AppCompatActivity {
             }else{
                 (findViewById(entry.getValue())).setEnabled(true);
             }
-
         }
+
     }
 
     private void executeSearchLeaderboard(int i){
         ProgressBar bar = findViewById(R.id.progress_leaderboard);
         LeaderboardTask task = new LeaderboardTask(LeaderboardActivity.this);
-        task.setAll(bar,rcView,adapter,arrstr);
+        task.setAll(bar,rcView,adapter,arrstr,i);
         task.execute(i);
     }
+
 }
 
 
