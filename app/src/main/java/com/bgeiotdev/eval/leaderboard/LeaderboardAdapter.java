@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bgeiotdev.eval.R;
@@ -49,6 +50,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         TextView posView = viewHolder.pos;
         TextView pseudoview = viewHolder.pseudo;
         TextView scoreView = viewHolder.score;
+        LinearLayout layoutdiff = viewHolder.layoutdiff;
+        TextView hard = viewHolder.hard;
+        TextView easy = viewHolder.easy;
 
         try {
             if(this.difficulty != 0){
@@ -57,14 +61,16 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
                 scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
             }else{
                 posView.setText("Meilleur temps : ");
-                String diff;
+
 
                 if(Integer.valueOf(obj.getString("type")) == 1){
-                    diff = "Facile";
+
+                    easy.setVisibility(View.VISIBLE);
                 }else{
-                    diff = "Difficile";
+
+                    hard.setVisibility(View.VISIBLE);
                 }
-                pseudoview.setText(diff);
+
                 scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
             }
 
@@ -84,8 +90,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         public TextView pseudo;
         public TextView pos;
         public TextView score;
-
-
+        public LinearLayout layoutdiff;
+        public TextView hard;
+        public TextView easy;
         public ViewHolder(View itemView) {
 
             super(itemView);
@@ -95,6 +102,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             pos = itemView.findViewById(R.id.pos_leaderboard);
             pseudo = itemView.findViewById(R.id.pseudo_leaderboard);
             score = itemView.findViewById(R.id.score_leaderboard);
+            layoutdiff = itemView.findViewById(R.id.layout_diff);
+            hard = itemView.findViewById(R.id.for_hard);
+            easy = itemView.findViewById(R.id.for_easy);
         }
     }
 

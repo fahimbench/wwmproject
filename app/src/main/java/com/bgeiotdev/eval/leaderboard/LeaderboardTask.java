@@ -1,5 +1,6 @@
 package com.bgeiotdev.eval.leaderboard;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ProgressBar;
+
+import com.bgeiotdev.eval.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,12 +37,14 @@ public class LeaderboardTask extends AsyncTask<Integer, Void, JSONObject[]> {
     private LeaderboardAdapter adapter;
     private Context context;
     private int difficulty;
+    private static Context cont;
 
     private JSONObject jsonUser;
     private JSONObject jsonGame;
 
     public LeaderboardTask(Context context) {
         this.context = context;
+        this.cont = context;
     }
 
     @Override
@@ -95,7 +100,6 @@ public class LeaderboardTask extends AsyncTask<Integer, Void, JSONObject[]> {
                         JSONObject obj2 = getMembersJSONObject(members2, Integer.valueOf(pseudo[pseudo.length - 1]));
                         String ps = obj2.getString("pseudo");
                         if(ps.equals(pseudo_settings)) {
-                            System.out.println(pseudo_settings);
                             obj1.put("idUser", ps);
                             find1 = true;
                             arrstr.add(obj1);
@@ -108,8 +112,7 @@ public class LeaderboardTask extends AsyncTask<Integer, Void, JSONObject[]> {
                         JSONObject obj2 = getMembersJSONObject(members2, Integer.valueOf(pseudo[pseudo.length - 1]));
                         String ps = obj2.getString("pseudo");
 
-                        if(ps.toString().equals(pseudo_settings)) {
-                            System.out.println(pseudo_settings);
+                        if(ps.equals(pseudo_settings)) {
                             obj1.put("idUser", ps);
                             find2 = true;
                             arrstr.add(obj1);
@@ -138,9 +141,10 @@ public class LeaderboardTask extends AsyncTask<Integer, Void, JSONObject[]> {
 
 
     public static URL buildUrl(String str) {
+        String mystring = ((Activity) cont).getResources().getString(R.string.host);
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https")
-                .encodedAuthority("domina.serveo.net")
+                .encodedAuthority(mystring)
                 .appendPath("api")
                 .appendPath(str)
                 .build();
