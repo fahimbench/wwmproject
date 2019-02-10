@@ -1,9 +1,11 @@
-package com.bgeiotdev.eval;
+package com.bgeiotdev.eval.Settings;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.bgeiotdev.eval.R;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override

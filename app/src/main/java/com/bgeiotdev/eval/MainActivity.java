@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bgeiotdev.eval.Settings.SettingsActivity;
+import com.bgeiotdev.eval.leaderboard.LeaderboardActivity;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView play;

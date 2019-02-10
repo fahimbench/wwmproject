@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval;
+package com.bgeiotdev.eval.leaderboard;
 
 
 import android.content.Context;
@@ -9,15 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bgeiotdev.eval.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
-    private ArrayList<String> test;
+    private ArrayList<JSONObject> test;
 
     // Pass in the contact array into the constructor
-    public LeaderboardAdapter(ArrayList<String> test) {
+    public LeaderboardAdapter(ArrayList<JSONObject> test) {
         this.test = test;
     }
 
@@ -37,16 +41,21 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String rrr = test.get(i);
+        JSONObject obj = test.get(i);
 
-        TextView pseudoview = viewHolder.pseudo;
-        pseudoview.setText(rrr.toString());
 
         TextView posView = viewHolder.pos;
-        posView.setText(rrr.toString());
-
+        TextView pseudoview = viewHolder.pseudo;
         TextView scoreView = viewHolder.score;
-        scoreView.setText(rrr.toString());
+
+        try {
+            posView.setText(obj.getString("id"));
+            pseudoview.setText(obj.getString("firstname"));
+            scoreView.setText(obj.getString("lastname"));
+        }catch (JSONException e){
+            e.getMessage();
+        }
+
     }
 
     @Override
@@ -66,8 +75,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             super(itemView);
 
 
-            pseudo = itemView.findViewById(R.id.pseudo_leaderboard);
+
             pos = itemView.findViewById(R.id.pos_leaderboard);
+            pseudo = itemView.findViewById(R.id.pseudo_leaderboard);
             score = itemView.findViewById(R.id.score_leaderboard);
         }
     }

@@ -1,6 +1,6 @@
-package com.bgeiotdev.eval;
+package com.bgeiotdev.eval.leaderboard;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,16 +8,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import com.bgeiotdev.eval.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class LeaderboardActivity extends AppCompatActivity {
-    private HashMap<String, Integer> listMenu = new HashMap<>();
 
+    private HashMap<String, Integer> listMenu = new HashMap<>();
+    private LeaderboardAdapter adapter;
+    private RecyclerView rcView;
+    private ArrayList<JSONObject> arrstr = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +33,17 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
         ActionBar actionbar = getSupportActionBar();
 
+        /*
+        SharedPreferences sp = getSharedPreferences("shared_prefs", MODE_PRIVATE);
+        String a = sp.getString("host", "");
+        */
+
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeButtonEnabled(true);
 
-        RecyclerView rcView = (RecyclerView) findViewById(R.id.leaderboard_recycler);
+        rcView = (RecyclerView) findViewById(R.id.leaderboard_recycler);
 
-        ArrayList<String> rr = new ArrayList<String>();
 
-        LeaderboardAdapter adapter = new LeaderboardAdapter(rr);
-
-        rcView.setAdapter(adapter);
-
-        rcView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,13 +100,13 @@ public class LeaderboardActivity extends AppCompatActivity {
         switch (menuItemId) {
 
             case R.id.easy_tab:
-
+                executeSearchLeaderboard(1);
                 break;
             case R.id.hard_tab:
-
+                executeSearchLeaderboard(2);
                 break;
             case R.id.alone_tab:
-
+                executeSearchLeaderboard(0);
                 break;
 
         }
@@ -117,6 +124,13 @@ public class LeaderboardActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    private void executeSearchLeaderboard(int i){
+        ProgressBar bar = findViewById(R.id.progress_leaderboard);
+        LeaderboardTask task = new LeaderboardTask(LeaderboardActivity.this);
+        task.setAll(bar,rcView,adapter,arrstr);
+        task.execute(i);
     }
 }
 
