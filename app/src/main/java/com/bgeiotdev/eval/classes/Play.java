@@ -14,7 +14,7 @@ public class Play {
         this.timer = timer;
         this.user = user;
         this.difficulty = difficulty;
-        this.grid = new Grid(difficulty);
+        this.grid = new Grid(difficulty, 9);
     }
 
     public void chronoStart(){
@@ -39,5 +39,40 @@ public class Play {
 
     public boolean isWin(){
         return true;
+    }
+
+    //GETTER SETTER
+
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public Chronometer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Chronometer timer) {
+        this.timer = timer;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 }

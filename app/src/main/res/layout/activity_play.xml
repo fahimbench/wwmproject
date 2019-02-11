@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Play.PlayActivity">
+    tools:context=".Play.PlayActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <GridView
+        android:id="@+id/gridSudoku"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="9"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|bottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Temps écoulé : "
+            android:gravity="start|top"
+            android:paddingTop="20dp"/>
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="80dp"/>
+    </LinearLayout>
+
+</LinearLayout>

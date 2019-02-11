@@ -1,10 +1,13 @@
 package com.bgeiotdev.eval.leaderboard;
 
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +28,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     private HashMap<String, Integer> listMenu = new HashMap<>();
     private LeaderboardAdapter adapter;
     private RecyclerView rcView;
-    private ArrayList<JSONObject> arrstr = new ArrayList<>();
+    private LeaderboardViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +45,15 @@ public class LeaderboardActivity extends AppCompatActivity {
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeButtonEnabled(true);
 
-        rcView = (RecyclerView) findViewById(R.id.leaderboard_recycler);
-
-
+        rcView = findViewById(R.id.leaderboard_recycler);
+        mViewModel = ViewModelProviders.of(this).get(LeaderboardViewModel.class);
+        DisplayLeaderboard();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_leaderboard, menu);
-        menu.performIdentifierAction(R.id.easy_tab, 0);
+        //menu.performIdentifierAction(R.id.easy_tab, 0);
 
         return true;
     }
@@ -104,12 +107,15 @@ public class LeaderboardActivity extends AppCompatActivity {
         switch (menuItemId) {
 
             case R.id.easy_tab:
+                mViewModel.difficulty = 1;
                 executeSearchLeaderboard(1);
                 break;
             case R.id.hard_tab:
+                mViewModel.difficulty = 2;
                 executeSearchLeaderboard(2);
                 break;
             case R.id.alone_tab:
+                mViewModel.difficulty = 3;
                 executeSearchLeaderboard(0);
                 break;
 
@@ -133,9 +139,16 @@ public class LeaderboardActivity extends AppCompatActivity {
     private void executeSearchLeaderboard(int i){
         ProgressBar bar = findViewById(R.id.progress_leaderboard);
         LeaderboardTask task = new LeaderboardTask(LeaderboardActivity.this);
-        task.setAll(bar,rcView,adapter,arrstr,i);
+        task.setAll(bar,rcView,adapter, mViewModel.list ,i);
         task.execute(i);
     }
+
+    private void DisplayLeaderboard(){
+        adapter = new LeaderboardAdapter(mViewModel.list, mViewModel.difficulty);
+        rcView.setAdapter(adapter);
+        rcView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
 
 }
 

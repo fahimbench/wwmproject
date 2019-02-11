@@ -1,7 +1,9 @@
 package com.bgeiotdev.eval.classes;
 
+import android.support.annotation.NonNull;
+
 public class Cell {
-    private int value;
+    private int value = 0;
     private Position position;
 
     public Cell(int value, Position position){
@@ -23,5 +25,11 @@ public class Cell {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
 }
