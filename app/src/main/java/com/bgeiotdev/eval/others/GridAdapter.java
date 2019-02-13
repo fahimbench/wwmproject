@@ -66,17 +66,15 @@ public class GridAdapter extends ArrayAdapter {
 
         cellule = convertView.findViewById(R.id.cell);
 
-        cellule.setText("");
+        cellule.setText((items[position].getValue() == 0) ? "" : String.valueOf(items[position].getValue()));
         cellule.setHeight((int) cellSize);
         cellule.setWidth((int) cellSize);
         cellule.setTextSize(pxtodp((int) Math.round(cellSize / 1.5)));
         int x = (int) Math.floor((double) position / 9) + 1;
         int y = (int) (((double) position) % 9) + 1;
-        posxy = new Position(x, y);
 
-        items[position] = new Cell(-1, posxy);
 
-        cellule.setOnClickListener(new CellOnClickListener(cellule, items[position], position, activity));
+        cellule.setOnClickListener(new CellOnClickListener(items, cellule, items[position], activity));
 
 
         return convertView;
@@ -93,9 +91,10 @@ public class GridAdapter extends ArrayAdapter {
         private int value;
         private Activity act;
         private Cell cell;
+        private Cell[] items;
 
-
-        public CellOnClickListener(TextView tv, Cell cell, int value, Activity act) {
+        public CellOnClickListener(Cell[] items, TextView tv, Cell cell, Activity act) {
+            this.items = items;
             this.tv = tv;
             this.cell = cell;
             this.position = cell.getPosition();
@@ -107,6 +106,7 @@ public class GridAdapter extends ArrayAdapter {
         public void onClick(View v) {
             tv.setBackgroundColor(Color.parseColor("#80FF0000"));
             chooseNumberAppear();
+            System.out.println(items.toString());
         }
 
         public void chooseNumberAppear() {
@@ -120,7 +120,7 @@ public class GridAdapter extends ArrayAdapter {
 
                 ll.addView(button);
 
-                button.setOnClickListener(new NumberClickListener(i,ll,button,tv,cell));
+                button.setOnClickListener(new NumberClickListener(items, i,ll,button,tv,cell));
 
             }
         }
@@ -134,8 +134,10 @@ public class GridAdapter extends ArrayAdapter {
         Button button;
         TextView tv;
         Cell cell;
+        Cell[] items;
 
-        public NumberClickListener(int i, LinearLayout ll, Button button, TextView tv, Cell cell) {
+        public NumberClickListener(Cell[] items, int i, LinearLayout ll, Button button, TextView tv, Cell cell) {
+            this.items =items;
             this.i = i;
             this.ll = ll;
             this.button = button;
@@ -150,8 +152,7 @@ public class GridAdapter extends ArrayAdapter {
             tv.setText(button.getText());
             ll.removeAllViews();
             tv.setBackgroundColor(0);
-            System.out.println(cell.getValue());
         }
 
-    };
+    }
 }

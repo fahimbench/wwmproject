@@ -1,6 +1,7 @@
 package com.bgeiotdev.eval.classes;
 
 import android.content.SharedPreferences;
+import android.view.MenuItem;
 import android.widget.Chronometer;
 
 public class Play {
@@ -33,7 +34,9 @@ public class Play {
         return true;
     }
 
-    public boolean seeIfCompleteGrid(){
+    public boolean seeIfCompleteGrid(MenuItem menuitem)
+    {
+
         return true;
     }
 

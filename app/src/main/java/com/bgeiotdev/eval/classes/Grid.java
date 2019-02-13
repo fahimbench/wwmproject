@@ -1,5 +1,7 @@
 package com.bgeiotdev.eval.classes;
 
+import com.bgeiotdev.eval.others.GridGen;
+
 import java.util.Arrays;
 
 public class Grid {
@@ -7,15 +9,25 @@ public class Grid {
     private boolean isComplete = false;
     private int difficulty;
     private int row_column;
-
+    private GridGen gridgen = new GridGen();
     public Grid(int difficulty, int row_column){
         this.difficulty = difficulty;
         this.row_column = row_column;
         this.grid = new Cell[row_column*row_column];
-        Arrays.fill(grid, new Cell(0,null));
+        generateFullGrid();
+        //Arrays.fill(grid, new Cell(0,null));
     }
 
     private void generateFullGrid(){
+        int[][] a = gridgen.generate(difficulty);
+        int k = 0;
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j < a[i].length; j++){
+                grid[k] = new Cell(a[i][j], new Position((int) i+1, (int) j+1));
+                k++;
+            }
+
+        }
 
     }
 

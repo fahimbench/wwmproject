@@ -1,5 +1,5 @@
 <PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.c/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
         android:key="pseudo_settings"

@@ -4,6 +4,7 @@
     <item
         android:id="@+id/validate"
         app:showAsAction="always"
+        android:enabled="false"
         android:title="Valider"
         />
     <item
