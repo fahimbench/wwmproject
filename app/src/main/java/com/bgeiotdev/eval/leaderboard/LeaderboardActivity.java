@@ -3,6 +3,7 @@ package com.bgeiotdev.eval.leaderboard;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,13 +36,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
         ActionBar actionbar = getSupportActionBar();
-
-        /*
-        SharedPreferences sp = getSharedPreferences("shared_prefs", MODE_PRIVATE);
-        String a = sp.getString("host", "");
-        */
-
-
+        actionbar.setDisplayShowTitleEnabled(false);
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeButtonEnabled(true);
 

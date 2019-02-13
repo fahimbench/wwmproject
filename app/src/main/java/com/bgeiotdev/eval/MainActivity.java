@@ -3,8 +3,10 @@ package com.bgeiotdev.eval;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -39,7 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         play.setOnClickListener(this);
         ladder.setOnClickListener(this);
         pref.setOnClickListener(this);
-
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        System.out.println(Math.round(size.x / 9));
     }
 
     @Override
@@ -48,8 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NetworkTask nt = null;
         switch(view.getId()){
             case R.id.play:
-                nt = new NetworkTask(this, PlayActivity.class, getWindow(), progressBar);
-                nt.execute();
+
+                intent = new Intent(this, PlayActivity.class);
+                startActivity(intent);
+                //nt = new NetworkTask(this, PlayActivity.class, getWindow(), progressBar);
+                //nt.execute();
                 break;
             case R.id.ladder:
                 nt = new NetworkTask(this, LeaderboardActivity.class, getWindow(), progressBar);

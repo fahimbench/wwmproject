@@ -29,4 +29,6 @@ public class Position {
         int[] pos = {this.x, this.y};
         return pos;
     }
+
+
 }

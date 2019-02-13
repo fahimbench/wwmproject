@@ -11,8 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="9"
-        />
+        android:background="@drawable/gridsudoku"
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"/>
 
+    <LinearLayout
+        android:id="@+id/button_panel"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

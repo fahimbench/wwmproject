@@ -11,8 +11,8 @@ public class Grid {
     public Grid(int difficulty, int row_column){
         this.difficulty = difficulty;
         this.row_column = row_column;
-        this.grid = new Cell[row_column^2];
-        Arrays.fill(grid, null);
+        this.grid = new Cell[row_column*row_column];
+        Arrays.fill(grid, new Cell(0,null));
     }
 
     private void generateFullGrid(){
