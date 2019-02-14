@@ -68,7 +68,9 @@ public class PlayActivity extends AppCompatActivity {
         public boolean onOptionsItemSelected (MenuItem item){
             switch (item.getItemId()) {
                 case R.id.validate:
+                    long time = chrono.getBase();
                     chrono.stop();
+
                     break;
                 case R.id.surrender:
                     chrono.stop();

@@ -11,7 +11,6 @@ public class GridGen {
 
     // generate a completely solved sudoku board
     public int[][] generate(int difficulty) {
-
         // set all values of puzzle to 0
         // 0 denotes an empty square
         for (int i = 0; i < 9; i++) {
@@ -21,16 +20,17 @@ public class GridGen {
         }
         switch (difficulty){
             case 1:
-                for(int i = 0; i <= 25; i++){
+                for(int i = 0; i < 25; i++){
                     solve(getRandomNumberInRange(0, 8),getRandomNumberInRange(0, 8));
                 }
                 break;
             case 2:
-                for(int i = 0; i <= 17; i++){
+                for(int i = 0; i < 17; i++){
                     solve(getRandomNumberInRange(0, 8),getRandomNumberInRange(0, 8));
                 }
                 break;
             default:
+
         }
 
 
@@ -40,51 +40,54 @@ public class GridGen {
 
     private void solve(int row, int col) {
 
-        Random gen = new Random();
-        boolean numFound = false;
+        if(puzzle[row][col] == 0 || puzzle[row][col] == -1) {
+            Random gen = new Random();
+            boolean numFound = false;
 
-        // list of numbers to try to place in square
-        ArrayList<Integer> nums = new ArrayList<Integer>();
+            // list of numbers to try to place in square
+            ArrayList<Integer> nums = new ArrayList<Integer>();
 
-        // fill list with numbers 1-9
-        for (int i = 1; i < 10; i++) {
-            nums.add(i);
-        }
-
-        // while we still have numbers to try and have not found a valid number
-        while (nums.isEmpty() == false || numFound == false) {
-
-            // pick random number from list of available numbers
-            int num = nums.get(gen.nextInt(nums.size()));
-
-            // check if generated number is valid
-            if (checkRow(row, num) && checkCol(col, num)
-                    && checkSection(row, col, num)) {
-
-                // add number to square
-                puzzle[row][col] = num;
-                numFound = true;
-                break;
-
-            } else {
-                // remove number from list of available numbers
-                nums.remove(Integer.valueOf(num));
-                // if we are out of numbers, stop trying to find a number
-                if (nums.isEmpty())
-                    break;
+            // fill list with numbers 1-9
+            for (int i = 1; i < 10; i++) {
+                nums.add(i);
             }
 
-        }
+            // while we still have numbers to try and have not found a valid number
+            while (!nums.isEmpty() || !numFound) {
 
-        // if out of numbers go back 1 square
-        if (nums.isEmpty() == true) {
-            back(row, col);
-        }
+                // pick random number from list of available numbers
+                int num = nums.get(gen.nextInt(nums.size()));
 
-        // if a number was added and there are still more empty squares
-        // go forward 1 square
-        else if (numFound == true && (emptyCheck() == true)) {
-            next(row, col);
+                // check if generated number is valid
+                if (checkRow(row, num) && checkCol(col, num)
+                        && checkSection(row, col, num)) {
+
+                    // add number to square
+
+                    puzzle[row][col] = num;
+                    numFound = true;
+
+                    break;
+                } else {
+                    // remove number from list of available numbers
+                    nums.remove(Integer.valueOf(num));
+                    // if we are out of numbers, stop trying to find a number
+                    if (nums.isEmpty())
+                        break;
+                }
+
+            }
+
+            // if out of numbers go back 1 square
+            if (nums.isEmpty() == true) {
+                back(row, col);
+            }
+
+            // if a number was added and there are still more empty squares
+            // go forward 1 square
+            else if (numFound && emptyCheck()) {
+                next(row, col);
+            }
         }
     }
 
@@ -163,7 +166,7 @@ public class GridGen {
 
     // searches puzzle for empty squares
     // 0 denotes empty
-    private boolean emptyCheck() {
+    public boolean emptyCheck() {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
