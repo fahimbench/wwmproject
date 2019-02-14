@@ -1,8 +1,10 @@
 package com.bgeiotdev.eval.Play;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import com.bgeiotdev.eval.classes.Grid;
 import com.bgeiotdev.eval.classes.Play;
 import com.bgeiotdev.eval.classes.User;
 import com.bgeiotdev.eval.others.GridAdapter;
+
+import java.util.concurrent.TimeUnit;
 
 public class PlayActivity extends AppCompatActivity {
 
@@ -69,16 +73,21 @@ public class PlayActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.validate:
                     long time = chrono.getBase();
-                    chrono.stop();
 
+                    if(true){
+                        chrono.stop();
+                        Intent intent = new Intent(this, PlaySuite.class);
+                        intent.putExtra("timer", TimeUnit.MILLISECONDS.toSeconds(SystemClock.elapsedRealtime() - time));
+                        this.startActivity(intent);
+                        finish();
+                    }
                     break;
                 case R.id.surrender:
-                    chrono.stop();
                     AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
                     alertbox.setMessage("Êtes vous sûre de vouloir abandonner la partie en cours ?");
                     alertbox.setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface arg0, int arg1) {
-                            chrono.start();
+
                         }
                     });
                     alertbox.setNegativeButton("Abandonner", new DialogInterface.OnClickListener() {

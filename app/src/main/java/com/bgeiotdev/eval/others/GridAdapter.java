@@ -25,6 +25,7 @@ public class GridAdapter extends ArrayAdapter {
     private double screenSize;
     private Activity activity;
     private LayoutInflater inflater;
+    private ViewGroup parent;
 
     public GridAdapter(Context context, int resource, Cell[] items, double screenSize, Activity activity) {
         super(context, resource, items);
@@ -58,6 +59,8 @@ public class GridAdapter extends ArrayAdapter {
         TextView cellule;
         GridView grid;
         Position posxy;
+
+
         cellSize = (int) Math.floor(screenSize / 9);
 
         if (convertView == null) {
@@ -65,8 +68,15 @@ public class GridAdapter extends ArrayAdapter {
         }
 
         cellule = convertView.findViewById(R.id.cell);
-
+        this.parent = parent;
         cellule.setText((items[position].getValue() == 0) ? "" : String.valueOf(items[position].getValue()));
+        if(items[position].getValue() != 0){
+            cellule.setEnabled(false);
+            cellule.setTextColor(Color.parseColor("#009933"));
+        }else{
+            cellule.setTextColor(Color.parseColor("#000000"));
+        }
+
         cellule.setHeight((int) cellSize);
         cellule.setWidth((int) cellSize);
         cellule.setTextSize(pxtodp((int) Math.round(cellSize / 1.5)));
@@ -84,6 +94,12 @@ public class GridAdapter extends ArrayAdapter {
         return (px / Resources.getSystem().getDisplayMetrics().density);
     }
 
+    public void clearAllBackground(){
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View v = parent.getChildAt(i);
+            v.setBackgroundColor(0);
+        }
+    }
     public class CellOnClickListener implements View.OnClickListener {
 
         private TextView tv;
@@ -104,20 +120,24 @@ public class GridAdapter extends ArrayAdapter {
 
         @Override
         public void onClick(View v) {
+            clearAllBackground();
             tv.setBackgroundColor(Color.parseColor("#80FF0000"));
             chooseNumberAppear();
             System.out.println(items.toString());
         }
 
         public void chooseNumberAppear() {
+
             LinearLayout ll = act.findViewById(R.id.button_panel);
             ll.setVisibility(View.VISIBLE);
-
+            ll.removeAllViews();
             for (int i = 1; i < 10; i++) {
                 final int finalI = i;
                 Button button = new Button(act);
                 button.setText(String.valueOf(i));
-
+                button.setHeight((int) cellSize);
+                button.setWidth((int) cellSize);
+                button.setTextSize(pxtodp((int) Math.round(cellSize / 1.5)));
                 ll.addView(button);
 
                 button.setOnClickListener(new NumberClickListener(items, i,ll,button,tv,cell));
