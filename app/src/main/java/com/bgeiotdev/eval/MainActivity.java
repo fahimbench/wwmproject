@@ -1,14 +1,10 @@
 package com.bgeiotdev.eval;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
-import android.arch.persistence.room.Database;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
-import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
@@ -18,14 +14,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bgeiotdev.eval.Classes.User.User;
-import com.bgeiotdev.eval.Classes.User.UserDao;
-import com.bgeiotdev.eval.Database.AppDatabase;
+import com.bgeiotdev.eval.Others.JsonAsync;
 import com.bgeiotdev.eval.Others.TimeUtils;
 import com.bgeiotdev.eval.Others.UserModelView;
 import com.bgeiotdev.eval.Play.PlayActivity;
 import com.bgeiotdev.eval.Settings.SettingsActivity;
 import com.bgeiotdev.eval.Leaderboard.LeaderboardActivity;
 import com.bgeiotdev.eval.Others.NetworkTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -66,9 +64,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
             user = new User("Guest"+ TimeUtils.uniqueCurrentTimeMS());
             umv.insertUser(user);
+            String request = "http://" + this.getResources().getString(R.string.host) + "/api/users";
+            JSONObject jsonParam = new JSONObject();
+            try {
+
+                jsonParam.put("pseudo", user.getPseudo());
+                jsonParam.put("email", "emailbidon@example.com");
+                jsonParam.put("firstname", "robert");
+                jsonParam.put("lastname", "De niro");
+                jsonParam.put("password", "unpasspastropcompliqué");
+                jsonParam.put("keyUser", user.getKey());
+
+            }catch (JSONException ex){
+               e.printStackTrace();
+            }
+            (new JsonAsync(request, "POST", jsonParam)).execute();
+        }
             PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pseudo_settings", user.getPseudo()).apply();
         }
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -80,8 +94,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, PlayActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
-                //nt = new NetworkTask(this, PlayActivity.class, getWindow(), progressBar);
-                //nt.execute();
                 break;
             case R.id.ladder:
                 nt = new NetworkTask(this, LeaderboardActivity.class, getWindow(), progressBar);
@@ -90,8 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.preferences:
                 intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
-                //nt = new NetworkTask(this, SettingsActivity.class, getWindow(), progressBar);
-                //nt.execute();
                 break;
                 default:
 

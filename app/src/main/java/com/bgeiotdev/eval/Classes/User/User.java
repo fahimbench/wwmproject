@@ -5,6 +5,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.bgeiotdev.eval.Others.TimeUtils;
+
 import java.io.Serializable;
 
 
@@ -18,8 +20,14 @@ public class User implements Serializable {
     @ColumnInfo(name = "pseudo")
     private String pseudo;
 
+    @ColumnInfo(name = "key")
+    private long key;
+
     public User( String pseudo){
+
         this.pseudo = pseudo;
+        this.key = TimeUtils.uniqueCurrentTimeMS();
+
     }
 
     public int getId() {
@@ -36,5 +44,13 @@ public class User implements Serializable {
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
+    }
+
+    public long getKey() {
+        return key;
+    }
+
+    public void setKey(long key) {
+        this.key = key;
     }
 }

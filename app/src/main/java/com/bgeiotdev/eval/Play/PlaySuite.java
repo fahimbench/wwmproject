@@ -34,7 +34,7 @@ public class PlaySuite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_suite);
         umv = ViewModelProviders.of(this).get(UserModelView.class);
-
+        user = umv.loadUser().get(0);
         long time = getIntent().getLongExtra("timer", 0);
 
         timer = findViewById(R.id.timer);
@@ -42,8 +42,8 @@ public class PlaySuite extends AppCompatActivity {
 
 
 
-        //PreferenceManager.getDefaultSharedPreferences(this).getString("pseudo_settings", "")
-        //player.setText("Félicitation " + umv.loadUser()[0].getPseudo());
+
+        player.setText("Félicitation " + user.getKey());
         timer.setText("Vous avez fini la grille en " + TimeUtils.secondsToString(time) + "");
 
 
