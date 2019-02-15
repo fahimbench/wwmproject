@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bgeiotdev.eval.Classes.User.User;
 import com.bgeiotdev.eval.Others.JsonAsync;
+import com.bgeiotdev.eval.Others.MyApplication;
 import com.bgeiotdev.eval.Others.TimeUtils;
 import com.bgeiotdev.eval.Others.UserModelView;
 import com.bgeiotdev.eval.Play.PlayActivity;
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             URL url = null;
             String type ="POST";
             try {
-                url = new URL("http://domina.serveo.net/api/users");
+                url = new URL("http://"+ getResources().getString(R.string.host) +"/api/users");
                 jsonObject = new JSONObject();
                 jsonObject.put("pseudo", ""+user.getPseudo());
                 jsonObject.put("email", "emailbidon@example.com");
