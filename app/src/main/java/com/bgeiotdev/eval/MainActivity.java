@@ -25,6 +25,7 @@ import com.bgeiotdev.eval.Others.NetworkTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,21 +65,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
             user = new User("Guest"+ TimeUtils.uniqueCurrentTimeMS());
             umv.insertUser(user);
-            String request = "http://" + this.getResources().getString(R.string.host) + "/api/users";
-            JSONObject jsonParam = new JSONObject();
+            JSONObject jsonObject = null;
+            URL url = null;
+            String type ="POST";
             try {
-
-                jsonParam.put("pseudo", user.getPseudo());
-                jsonParam.put("email", "emailbidon@example.com");
-                jsonParam.put("firstname", "robert");
-                jsonParam.put("lastname", "De niro");
-                jsonParam.put("password", "unpasspastropcompliqué");
-                jsonParam.put("keyUser", user.getKey());
-
-            }catch (JSONException ex){
-               e.printStackTrace();
+                url = new URL("http://domina.serveo.net/api/users");
+                jsonObject = new JSONObject();
+                jsonObject.put("pseudo", ""+user.getPseudo());
+                jsonObject.put("email", "emailbidon@example.com");
+                jsonObject.put("firstname", "robert");
+                jsonObject.put("lastname", "Deniro");
+                jsonObject.put("password", "unpasspastropcu");
+                jsonObject.put("keyUser", ""+user.getKey());
+            }catch (Exception ex) {
+                e.printStackTrace();
             }
-            (new JsonAsync(request, "POST", jsonParam)).execute();
+            (new JsonAsync(url, type, jsonObject)).execute();
         }
             PreferenceManager.getDefaultSharedPreferences(this).edit().putString("pseudo_settings", user.getPseudo()).apply();
         }
@@ -96,8 +98,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.ladder:
-                nt = new NetworkTask(this, LeaderboardActivity.class, getWindow(), progressBar);
-                nt.execute();
+                
+                //nt = new NetworkTask(this, LeaderboardActivity.class, getWindow(), progressBar);
+                //nt.execute();
                 break;
             case R.id.preferences:
                 intent = new Intent(this, SettingsActivity.class);

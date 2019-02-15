@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.bgeiotdev.eval.Classes.User.User;
 import com.bgeiotdev.eval.R;
 
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -22,39 +24,42 @@ import java.util.Iterator;
 import javax.net.ssl.HttpsURLConnection;
 
 
-public class JsonAsync  extends AsyncTask<String, Void, Void> {
+public class JsonAsync extends AsyncTask<String, Void, Void> {
 
-    private String request;
+    private URL url;
     private String type;
-    private JSONObject jsonParam;
+    private JSONObject jsonObject;
 
-    public JsonAsync(String request, String type, JSONObject jsonParam){
-        this.request = request;
+    public JsonAsync(URL url, String type, JSONObject jsonObject ) {
+        this.url = url;
         this.type = type;
-        this.jsonParam = jsonParam;
+        this.jsonObject = jsonObject;
     }
 
     public Void doInBackground(String... arg0) {
 
-        URL url = null;
         try {
-            url = new URL(request);
+
+
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
+            connection.setConnectTimeout(10000);
+            connection.setInstanceFollowRedirects(false);
             connection.setDoOutput(true);
             connection.setDoInput(true);
-            connection.setRequestMethod("POST");
-            connection.setConnectTimeout(10000);
+            connection.setRequestMethod(type);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("charset", "utf-8");
+            connection.setUseCaches(false);
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 
-            System.out.println(jsonParam.toString());
-            wr.writeBytes(jsonParam.toString());
+
+            wr.writeBytes(jsonObject.toString());
+
 
             wr.flush();
             wr.close();
-            connection.getResponseMessage();
+            System.out.println(connection.getResponseMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -29,7 +29,7 @@ public class ConnectivityHelper {
         //Verifie si il accede bien à internet
         if (isNetworkAvailable()) {
             try {
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("https://"+ mystring + "/").openConnection());
+                HttpURLConnection urlc = (HttpURLConnection) (new URL("https://"+ mystring + "/api/users").openConnection());
                 urlc.setRequestProperty("User-Agent", "Test");
                 urlc.setRequestProperty("Connection", "close");
                 urlc.setConnectTimeout(5000);
