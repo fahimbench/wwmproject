@@ -5,6 +5,8 @@ Inachevé, j'ai eu des problèmes sur la fin pour connecter l'appli avec mon api
 Le sudoku est aussi inachevé il me restait a faire un algorithme de résolution en fin de jeu.
 Besoin de mon api pour tester certaines fonctionnalités comme le classement en ligne.
 J'ai dans ce projet appliqué des notions vus en cours:
+
+```bash
 -Intent
 -AAC
 -Room
@@ -15,3 +17,4 @@ J'ai dans ce projet appliqué des notions vus en cours:
 -GridView
 -AsyncTask
 -...
+```
