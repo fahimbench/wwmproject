@@ -18,14 +18,15 @@ import android.widget.Chronometer;
 import android.widget.GridView;
 
 import com.bgeiotdev.eval.R;
-import com.bgeiotdev.eval.classes.Grid;
-import com.bgeiotdev.eval.classes.Play;
-import com.bgeiotdev.eval.classes.User;
-import com.bgeiotdev.eval.others.GridAdapter;
+import com.bgeiotdev.eval.Classes.Grid.Grid;
+import com.bgeiotdev.eval.Classes.Main.Play;
+import com.bgeiotdev.eval.Classes.User.User;
+import com.bgeiotdev.eval.Others.GridAdapter;
 
+import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class PlayActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity implements Serializable{
 
     GridView gridView;
     Chronometer chrono;
@@ -47,7 +48,7 @@ public class PlayActivity extends AppCompatActivity {
         chrono = findViewById(R.id.chronometer);
 
         difficulty = Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(this).getString("difficulty_settings", "1"));
-
+        user = (User) getIntent().getSerializableExtra("user");
         play = new Play(chrono, user, difficulty);
 
         grid = play.getGrid();

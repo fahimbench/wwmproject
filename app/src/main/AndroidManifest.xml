@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name="com.bgeiotdev.eval.Others.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,7 +19,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Play.PlaySuite"></activity>
         <activity android:name=".Play.PlayActivity" />
-        <activity android:name=".leaderboard.LeaderboardActivity" />
+        <activity android:name=".Leaderboard.LeaderboardActivity" />
         <activity
             android:name=".Settings.SettingsActivity"
             android:label="@string/title_activity_settings" />

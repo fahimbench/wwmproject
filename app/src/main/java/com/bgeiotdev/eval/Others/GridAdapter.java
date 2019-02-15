@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval.others;
+package com.bgeiotdev.eval.Others;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,9 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bgeiotdev.eval.Classes.Grid.Cell;
 import com.bgeiotdev.eval.R;
-import com.bgeiotdev.eval.classes.Cell;
-import com.bgeiotdev.eval.classes.Position;
+import com.bgeiotdev.eval.Classes.Grid.Position;
 
 public class GridAdapter extends ArrayAdapter {
     private Context context;

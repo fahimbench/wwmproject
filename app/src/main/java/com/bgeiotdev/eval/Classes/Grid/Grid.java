@@ -1,8 +1,6 @@
-package com.bgeiotdev.eval.classes;
+package com.bgeiotdev.eval.Classes.Grid;
 
-import com.bgeiotdev.eval.others.GridGen;
-
-import java.util.Arrays;
+import com.bgeiotdev.eval.Others.GridGen;
 
 public class Grid {
     private Cell[] grid;

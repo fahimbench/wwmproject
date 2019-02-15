@@ -1,6 +1,4 @@
-package com.bgeiotdev.eval.classes;
-
-import android.support.annotation.NonNull;
+package com.bgeiotdev.eval.Classes.Grid;
 
 public class Cell {
     private int value;

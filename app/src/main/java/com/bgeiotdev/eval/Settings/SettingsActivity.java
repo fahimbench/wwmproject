@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(R.id.settings_layout, new SettingsFragment())
                 .commit();
 
+
     }
 
     @Override

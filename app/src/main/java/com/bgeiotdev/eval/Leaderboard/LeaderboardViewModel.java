@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval.leaderboard;
+package com.bgeiotdev.eval.Leaderboard;
 
 import android.arch.lifecycle.ViewModel;
 

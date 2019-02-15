@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval.classes;
+package com.bgeiotdev.eval.Classes.Grid;
 
 public class Position {
     private int x;

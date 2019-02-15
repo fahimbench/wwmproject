@@ -1,18 +1,14 @@
-package com.bgeiotdev.eval.others;
+package com.bgeiotdev.eval.Others;
 
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
 
 import com.bgeiotdev.eval.R;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URL;
 
 public class ConnectivityHelper {

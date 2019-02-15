@@ -1,8 +1,7 @@
-package com.bgeiotdev.eval.leaderboard;
+package com.bgeiotdev.eval.Leaderboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.preference.PreferenceManager;
@@ -10,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ProgressBar;
 
 import com.bgeiotdev.eval.R;
@@ -26,8 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class LeaderboardTask extends AsyncTask<Integer, Void, JSONObject[]> {
 

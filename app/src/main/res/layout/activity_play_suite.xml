@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".Play.PlaySuite">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/timer"
         />
+
+
 </LinearLayout>

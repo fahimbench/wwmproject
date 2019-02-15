@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval.others;
+package com.bgeiotdev.eval.Others;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.bgeiotdev.eval.MainActivity;
 
 
 public class NetworkTask extends AsyncTask<Void, Void, Boolean> {

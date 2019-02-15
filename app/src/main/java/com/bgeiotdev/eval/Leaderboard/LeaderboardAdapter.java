@@ -1,4 +1,4 @@
-package com.bgeiotdev.eval.leaderboard;
+package com.bgeiotdev.eval.Leaderboard;
 
 
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bgeiotdev.eval.Others.TimeUtils;
 import com.bgeiotdev.eval.R;
 
 import org.json.JSONException;
@@ -58,7 +59,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             if(this.difficulty != 0){
                 posView.setText(String.valueOf(i+1));
                 pseudoview.setText(obj.getString("idUser"));
-                scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
+                scoreView.setText(TimeUtils.secondsToString(Integer.valueOf(obj.getString("score"))));
             }else{
                 posView.setText("Meilleur temps : ");
 
@@ -71,7 +72,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
                     hard.setVisibility(View.VISIBLE);
                 }
 
-                scoreView.setText(secondsToString(Integer.valueOf(obj.getString("score"))));
+                scoreView.setText(TimeUtils.secondsToString(Integer.valueOf(obj.getString("score"))));
             }
 
         }catch (JSONException e){
@@ -108,7 +109,4 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         }
     }
 
-    private String secondsToString(int pTime) {
-        return String.format("%02d:%02d", pTime / 60, pTime % 60);
-    }
 }
